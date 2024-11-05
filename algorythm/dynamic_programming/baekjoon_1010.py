@@ -3,6 +3,7 @@
 
 import math
 
+
 def factorial(num, dp):
     if dp[num] != 0:
         return dp[num]

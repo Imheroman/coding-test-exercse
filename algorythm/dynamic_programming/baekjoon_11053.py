@@ -21,7 +21,7 @@ def solution(n, sequence, dp):
 # SEQUENCE = list(map(int, input().split()))
 N = 5  # 부분 수열의 크기
 # SEQUENCE = [10, 20, 10, 30, 20, 50]  # 부분 수열을 저장한 리스트
-SEQUENCE = [3, 10, 2, 1, 20]
+SEQUENCE = [3, 10, 2, 1, 201]
 DP = [1] * (N + 1)  # 길이를 저장하는 DP
 
 print(solution(N, SEQUENCE, DP))

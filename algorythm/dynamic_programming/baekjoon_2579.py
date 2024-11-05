@@ -1,6 +1,5 @@
 # https://www.acmicpc.net/problem/2579
 # 계단 오르기
-# 10%에서 안 넘어감
 
 def solution(n, repository, supplier):
     if n == 1:  # 1이면 그냥 첫 계단까지
