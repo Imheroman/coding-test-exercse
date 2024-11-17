@@ -1,6 +1,5 @@
 # https://www.acmicpc.net/problem/2156
 # 포도주 시식
-# TODO: here !
 
 def solution(n, dp, wines):
     dp[0] = wines[0]
