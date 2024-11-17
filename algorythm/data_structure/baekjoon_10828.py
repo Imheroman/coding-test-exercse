@@ -1,6 +1,5 @@
 # https://www.acmicpc.net/problem/10828
 # 스택
-# TODO: Here !
 import sys
 
 
