@@ -19,9 +19,7 @@ def solution(h, com):
 
 N = int(sys.stdin.readline())
 heap = []
-# commands = list(int(sys.stdin.readline()) for _ in range(N))
 
 for _ in range(N):
-    # commands.append(int(sys.stdin.readline()))
     command = int(sys.stdin.readline())
     solution(heap, command)
