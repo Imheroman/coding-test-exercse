@@ -1,25 +1,23 @@
 # https://www.acmicpc.net/problem/1976
 # 여행가자
-# 거의 참고 안 한 참고 블로그 ,, : https://eunjng.tistory.com/85
 from sys import stdin
 input = stdin.readline
 
 
 def find_root(p, x):
-    if x != p[x]:
-        p[x] = find_root(p, p[x])
+    if x != p[x]:  # 현재의 값이 인덱스의 값과 다를 경우 == 현재의 노드의 부모 노드가 있다는 것
+        p[x] = find_root(p, p[x])  # 부모 노드를 탐색
 
     return p[x]
 
 
 def union_root(p, c, y):
-    x = find_root(p, c)
-    y = find_root(p, y)
-    # print("p:", p, "-> x:", x, ", y:", y)
+    x = find_root(p, c)  # c의 부모 노드를 탐색
+    y = find_root(p, y)  # y의 부모 노드를 탐색
 
-    if x > y:
-        p[x] = y
-    else:
+    if x > y:  # x가 더 크면
+        p[x] = y  # x의 부모 노드를 더 작은 값인 y로 설정
+    else:  # y가 더 큰 경우
         p[y] = x
 
 
@@ -37,10 +35,8 @@ answer = "YES"
 for current_index in range(1, M):
     pre = plans[current_index - 1]  # 이전 방문 노드
     current = plans[current_index]  # 현재 방문 노드
-    print("current:", current, ", pre:", pre)
     if cities[pre] != cities[current]:  # 이전 방문 노드와 현재 방문 노드가 다르다면 연결되어 있지 않은 것임
         answer = "NO"
         break
 
-# print("cities:", cities)
 print(answer)
