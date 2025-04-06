@@ -1,6 +1,5 @@
 # https://www.acmicpc.net/problem/1697
 # 숨바꼭질
-# TODO: Here!
 
 from sys import stdin
 
