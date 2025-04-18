@@ -34,6 +34,7 @@ def virus(g, index):
                 g[row][col] = 2
 
 
+
 answer = 0
 
 index_range = N * M
