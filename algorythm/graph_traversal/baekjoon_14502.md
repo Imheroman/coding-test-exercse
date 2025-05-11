@@ -213,3 +213,72 @@ for i in range(index_range // 2):
 print(answer)
 
 ```
+
+### 시도2(35116kb, 7596ms)
+
+백트래킹을 공부하고 순열, 조합 등으로 재귀를 함께 공부한 후 문제를 해결하였다.
+
+처음 벽을 세우는 로직을 순열을 구하는 알고리즘으로 접근하여 순열을 이용해 벽을 세워야 하는 좌표를 구하였다.
+(조합으로 해결할 수 있고, 경우의 수가 더 적어 더 빠를 것 같지만, 알고리즘을 순열로 접근했어서 빠른 문제 풀이를 위해 그냥 순열만 진행함)
+
+이후 벽이 3개(문제에서 정해진 벽을 세우는 횟수)가 세워지면 기존 배열을 복사하여 새로운 배열을 만들었고(재사용하기 위해),
+해당 배열을 이용하여 BFS를 진행해서 바이러스를 전파하였다.
+
+```python
+# https://www.acmicpc.net/problem/14502
+# 연구소
+from collections import deque
+from sys import stdin
+
+input = stdin.readline
+DIRECTIONS = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+M, N = map(int, input().rstrip().split())
+graphs = [list(map(int, input().rstrip().split())) for _ in range(M)]
+# M, N = 7, 7
+# graphs = [
+#     list(map(int, "2 0 0 0 1 1 0".split())),
+#     list(map(int, "0 0 1 0 1 2 0".split())),
+#     list(map(int, "0 1 1 0 1 0 0".split())),
+#     list(map(int, "0 1 0 0 0 0 0".split())),
+#     list(map(int, "0 0 0 0 0 1 1".split())),
+#     list(map(int, "0 1 0 0 0 0 0".split())),
+#     list(map(int, "0 1 0 0 0 0 0".split()))
+# ]
+
+
+def permutations(arr, size):
+    answer = 0
+
+    if size == 0:
+        copy_graphs = [c[:] for c in arr]
+
+        queue = deque()
+        for i in range(M):
+            for j in range(N):
+                if copy_graphs[i][j] == 2:
+                    queue.append((i, j))
+
+        while queue:
+            x, y = queue.popleft()
+
+            for dx, dy in DIRECTIONS:
+                row, col = x + dx, y + dy
+                if 0 <= row < M and 0 <= col < N and copy_graphs[row][col] == 0:
+                    queue.append((row, col))
+                    copy_graphs[row][col] = 2
+
+        return sum(graph.count(0) for graph in copy_graphs)
+
+    for r in range(M):
+        for c in range(N):
+            if arr[r][c] == 0:
+                arr[r][c] = 1
+                answer = max(answer, permutations(arr, size - 1))
+                arr[r][c] = 0
+
+    return answer
+
+
+print(permutations(graphs, 3))
+```
